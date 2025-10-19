@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp 20/10 tặng bạn cùng bàn</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', cursive;
+      background-color: #ffe6f2;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      text-align: center;
+      padding: 40px;
+      width: 350px;
+      position: relative;
+      z-index: 2;
+      display: none;
+      animation: fadeIn 2s ease forwards;
+    }
+    h1 {
+      color: #ff1493;
+    }
+    p {
+      color: #333;
+      font-size: 16px;
+    }
+    button {
+      background-color: #ff66b2;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff3399;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-800px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .start-screen {
+      text-align: center;
+      color: #ff1493;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .question {
+      margin-top: 30px;
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    #noBtn {
+      position: absolute;
+    }
+
+    .lover {
+      display: none;
+      margin-top: 20px;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .lover img {
+      width: 150px;
+      border-radius: 15px;
+      margin-top: 10px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="start-screen">
+    🌸 Chúc mừng ngày Phụ nữ Việt Nam 20/10 🌸<br><br>
+    <button id="openBtn">Mở thiệp</button>
+  </div>
+
+  <div class="card" id="card">
+    <h1>💖 Chúc mừng 20/10 💖</h1>
+    <p>Gửi đến Khánh linh dễ thương nhất,<br>
+    Chúc bạn ngày 20/10 thật xinh đẹp, vui tươi và tràn ngập yêu thương! 🌸<br>
+    Mong rằng mỗi ngày đều là một ngày vui và ngập tràn may mắn đối với Linh !</p>
+    <p>— Người Gửi: Nhe gửi Linh 💌 —</p>
+
+    <div class="question" id="question">
+      <p>💞 Có muốn xem người yêu mới của nhe hong? 💞</p>
+      <button id="yesBtn">Có 🥰</button>
+      <button id="noBtn">Không 😝</button>
+    </div>
+
+    <div class="lover" id="lover">
+      <p>😚 Đây là người yêu của nhe nè 💕</p>
+      <img src="ny nhe nè.jpg" alt="ny của bạn 💞">
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('openBtn');
+    const card = document.getElementById('card');
+    const startScreen = document.querySelector('.start-screen');
+    const question = document.getElementById('question');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const lover = document.getElementById('lover');
+
+    btn.addEventListener('click', () => {
+      startScreen.style.display = 'none';
+      card.style.display = 'block';
+
+      // Hiện câu hỏi sau 4 giây
+      setTimeout(() => {
+        question.style.display = 'block';
+      }, 4000);
+    });
+
+    // Nút "Không" chạy trốn
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    // Nút "Có" bấm hiện ảnh người yêu
+    yesBtn.addEventListener('click', () => {
+      alert("💞 Thế đồng ý làm người Yêu Nhe rồi nhaaa 💕💞");
+      question.style.display = 'none';
+      lover.style.display = 'block';
+    });
+
+    // Tạo tim bay
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
